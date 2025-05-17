@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://buxy4ngnq8fib"]
+
+[ext_resource type="Script" uid="uid://o2k2dao2sx06" path="res://scenes/main.gd" id="1_o5qli"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o5qli")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="send" type="Button" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "send
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="start" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "start"
+
+[node name="join" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "join"
+
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/send" to="." method="_on_send_message_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/start" to="." method="_on_start_server_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/join" to="." method="_on_join_server_pressed"]
