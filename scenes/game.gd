@@ -15,7 +15,7 @@ func _on_start_server_pressed():
 		func(new_peer_id):
 			await get_tree().create_timer(1).timeout
 			rpc("add_newly_connected_player_character", new_peer_id)
-			rpc_id(new_peer_id, "add_previously_connected_player_characters", connected_peer_ids)
+			#rpc_id(new_peer_id, "add_previously_connected_player_characters", connected_peer_ids)
 			add_player_character(new_peer_id)
 			print("created")
 	)
@@ -35,9 +35,8 @@ func add_player_character(peer_id):
 	var player_character = preload("res://scenes/player.tscn").instantiate()
 	player_character.set_multiplayer_authority(peer_id)
 	add_child(player_character)
-	if peer_id == multiplayer.get_unique_id():
-		local_player_character = player_character
-		
+	print("gere#####################",peer_id ,multiplayer.get_unique_id(),)
+
 @rpc
 func add_previously_connected_player_characters(peer_ids):
 	for peer_id in peer_ids:

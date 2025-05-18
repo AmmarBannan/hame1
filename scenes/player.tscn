@@ -44,6 +44,7 @@ radius = 5.0
 height = 16.0
 
 [node name="player" type="CharacterBody2D"]
+position = Vector2(58, -160)
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
