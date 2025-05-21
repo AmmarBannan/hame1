@@ -1,35 +1,48 @@
 extends CharacterBody2D
 
-const speed = 150.0
-const jump_velocity = -400.0
+const SPEED = 130.0
+const JUMP_VELOCITY = -300.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@onready var animated_sprite = $AnimatedSprite2D
 
+func _ready():
+	name = str(get_multiplayer_authority())
+	$Name.text = str(name)
+	
 func _physics_process(delta: float) -> void:
-	if is_multiplayer_authority():
-		var direction:Vector2 =Vector2.ZERO
+	if is_multiplayer_authority():  # Only control your own player
+		# Apply gravity
 		if not is_on_floor():
-			velocity.y +=gravity*delta
+			velocity.y += gravity * delta
 		
+		# Handle jump
 		if Input.is_action_just_pressed("up") and is_on_floor():
-			direction.y =jump_velocity
+			velocity.y = JUMP_VELOCITY
 			
-		if Input.is_action_just_pressed("down") and not is_on_floor():
-			velocity.y =-jump_velocity
-			
+		# Get input direction (-1, 0, or 1)
+		var direction = Input.get_axis("left", "right")
 		
-		var d=Input.get_axis("left","right")
-		if d:
-			direction.x= d*speed
-		else:
-			velocity.x=move_toward(velocity.x,0,speed)
+		# Flip sprite based on direction
+		if direction > 0:
+			animated_sprite.flip_h = false
+		elif direction < 0:
+			animated_sprite.flip_h = true
 			
-		global_position += direction.normalized()
+		# Apply movement
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+		
+		# Sync position BEFORE moving (to avoid overwriting)
 		rpc("remote_set_position", global_position)
+		
+		# Move the character
 		move_and_slide()
-	
-@rpc("unreliable","any_peer")
-func remote_set_position(authority_position):
-	global_position = authority_position
-	
-	
+
+# Allow any peer to update positions (crucial for multiplayer sync)
+@rpc("any_peer", "unreliable")
+func remote_set_position(new_position):
+	if not is_multiplayer_authority():
+		global_position = new_position
