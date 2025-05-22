@@ -6,9 +6,15 @@ const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite = $AnimatedSprite2D
 
+var player_name 
+
 func _ready():
 	name = str(get_multiplayer_authority())
-	$Name.text = str(name)
+	get_node("res://scenes/game.tscn").name_submitted.connect(_on_name_received)
+	
+func _on_name_received(name):
+	self.namePlayer = name
+	$Name.text = name
 	
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():  # Only control your own player

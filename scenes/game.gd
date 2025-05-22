@@ -4,24 +4,30 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 
 const PORT = 9999
 const ADDRESS = "127.0.0.1"
+signal name_submitted(player_name)
 
 var connected_peer_ids = []
 var local_player_character
 
+@onready var playerName
 
-
-func _process(delta: float) -> void:
-	var name: LineEdit = $menu/HBoxContainer/name
-	print(name.text)
-	
+var enterGame=false
+func _on_submitName()->void:
+	var name: LineEdit = $menu/wrapper/Name/name
 	if name.text=="":
-		$menu/HBoxContainer/VBoxContainer/START.disabled=true
+		enterGame=false
 	else:
-		$menu/HBoxContainer/VBoxContainer/START.disabled=false
-		
+		playerName=name
+		emit_signal("name_submitted", name.text)
+		enterGame=true
+
 	
-
-
+func _process(delta: float) -> void:
+	if !enterGame:
+		$menu/wrapper/server/START.disabled=true
+	else:
+		$menu/wrapper/server/START.disabled=false
+		
 func _on_host_pressed():
 	$menu.visible = false
 	multiplayer_peer.create_server(PORT)

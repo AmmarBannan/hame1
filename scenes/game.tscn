@@ -70,24 +70,31 @@ offset_top = -128.0
 offset_right = 40.0
 offset_bottom = -27.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="menu"]
+[node name="wrapper" type="VBoxContainer" parent="menu"]
 layout_mode = 2
 
-[node name="name" type="LineEdit" parent="menu/HBoxContainer"]
+[node name="Name" type="HBoxContainer" parent="menu/wrapper"]
+layout_mode = 2
+
+[node name="name" type="LineEdit" parent="menu/wrapper/Name"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 18
 
-[node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer"]
+[node name="submit" type="Button" parent="menu/wrapper/Name"]
+layout_mode = 2
+text = "submit name"
+
+[node name="server" type="HBoxContainer" parent="menu/wrapper"]
 layout_mode = 2
 
-[node name="START" type="Button" parent="menu/HBoxContainer/VBoxContainer"]
+[node name="START" type="Button" parent="menu/wrapper/server"]
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "START"
 
-[node name="JOIN" type="Button" parent="menu/HBoxContainer/VBoxContainer"]
+[node name="JOIN" type="Button" parent="menu/wrapper/server"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "JOIN"
@@ -95,5 +102,6 @@ text = "JOIN"
 [node name="LineEdit" type="LineEdit" parent="menu"]
 layout_mode = 2
 
-[connection signal="pressed" from="menu/HBoxContainer/VBoxContainer/START" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="menu/HBoxContainer/VBoxContainer/JOIN" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="menu/wrapper/Name/submit" to="." method="_on_submitName"]
+[connection signal="pressed" from="menu/wrapper/server/START" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="menu/wrapper/server/JOIN" to="." method="_on_join_pressed"]
