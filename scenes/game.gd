@@ -10,15 +10,16 @@ var connected_peer_ids = []
 var local_player_character
 
 @onready var playerName
+@onready var nameLE: LineEdit = $menu/wrapper/Name/name
 
 var enterGame=false
 func _on_submitName()->void:
-	var name: LineEdit = $menu/wrapper/Name/name
-	if name.text=="":
+	if nameLE.text.length()<3:
 		enterGame=false
 	else:
-		playerName=name
-		emit_signal("name_submitted", name.text)
+		playerName=nameLE.text
+		print(playerName)
+		PlayerData.player_name = playerName.strip_edges()
 		enterGame=true
 
 	
