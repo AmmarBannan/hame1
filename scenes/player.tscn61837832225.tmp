@@ -1,9 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0vpxlcetmhwv"]
+[gd_scene load_steps=10 format=3 uid="uid://b0vpxlcetmhwv"]
 
 [ext_resource type="Texture2D" uid="uid://b8cmjj8vq3r8d" path="res://assets/sprites/knight.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://cv6upvpu3lixe" path="res://scenes/player.gd" id="1_g2els"]
-[ext_resource type="Script" uid="uid://dha2juaccijxh" path="res://scripts/model/state_machine.gd" id="3_qhqgy"]
-[ext_resource type="Script" uid="uid://b0lu18e3t202h" path="res://scripts/model/PlayerIdle.gd" id="4_dqkch"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2els"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -82,11 +80,3 @@ frame_progress = 0.854775
 position = Vector2(-3, -2.38419e-07)
 scale = Vector2(0.391343, 0.356104)
 shape = SubResource("CapsuleShape2D_g2els")
-
-[node name="stateMachine" type="Node" parent="."]
-script = ExtResource("3_qhqgy")
-
-[node name="PlayerIdle" type="Node" parent="stateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("4_dqkch")
-player = NodePath("../..")
-metadata/_custom_type_script = "uid://b0lu18e3t202h"

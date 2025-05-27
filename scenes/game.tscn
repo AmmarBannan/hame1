@@ -60,12 +60,6 @@ visible = false
 position = Vector2(60, -76)
 constant_linear_velocity = Vector2(2, 0)
 
-[node name="coin" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(52, -28)
-
-[node name="coin2" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(109, -59)
-
 [node name="Killzone" parent="." instance=ExtResource("6_p57ef")]
 position = Vector2(-5, 9)
 
@@ -107,6 +101,15 @@ text = "JOIN"
 
 [node name="LineEdit" type="LineEdit" parent="menu"]
 layout_mode = 2
+
+[node name="coin3" type="Node2D" parent="."]
+visible = false
+
+[node name="coin" parent="coin3" instance=ExtResource("5_iywne")]
+position = Vector2(52, -28)
+
+[node name="coin2" parent="coin3" instance=ExtResource("5_iywne")]
+position = Vector2(109, -59)
 
 [connection signal="pressed" from="menu/wrapper/Name/submit" to="." method="_on_submitName"]
 [connection signal="pressed" from="menu/wrapper/server/START" to="." method="_on_host_pressed"]
