@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="learn2"
-run/main_scene="uid://cco8fglfgusw7"
+run/main_scene="uid://syghgt1for2i"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://script/network/Global.gd"
 
 [dotnet]
 
@@ -41,3 +45,10 @@ move_down={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="backgorund"
+2d_navigation/layer_1="background"
+2d_physics/layer_2="mid"
+2d_navigation/layer_2="mid"
