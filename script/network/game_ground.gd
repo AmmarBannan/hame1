@@ -6,31 +6,52 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 const PORT = 9999
 const ADDRESS = "10.0.0.5"
 var init_params={}
+var connected_peer_ids = []
+var local_player_character
 
 func _ready():
-	print(init_params.auth)
+	if !init_params.auth:
+		print("error no data")	
+	elif init_params.auth:
+		print("host started")	
+		_host(init_params.playerName)
+	else:
+		print("client joined")	
+		_join(init_params.playerName)
 
-func _host():
+func _host(playerName):
 	multiplayer_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
-	
+	add_player_character(1,playerName)
 	multiplayer_peer.peer_connected.connect(
-		func(new_peer_id):
-			print("Peer connected:", new_peer_id)
+		func(new_peer_id,packet: PackedByteArray):
+			var clientName
+			var data = packet.get_string_from_utf8()
+			if data.begins_with("NAME:"):
+				clientName = data.trim_prefix("NAME:")
+			print("Peer connected:", new_peer_id,new_peer_id)
 			rpc("add_newly_connected_player_character",new_peer_id)
-			#rpc_id(new_peer_id, "add_previously_connected_player_characters", connected_peer_ids)
+			rpc_id(new_peer_id, "add_previously_connected_player_characters", connected_peer_ids)
 	)
-func _join():
+	
+func _join(playerName):
 	multiplayer_peer.create_client(ADDRESS, PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
 	
-@rpc("reliable")
-func remote_spawn_player(peer_id, player_name):
-	add_player_character()
 
-func add_player_character():
+func add_player_character(peer_id,playerName):
+	connected_peer_ids.append(peer_id)
 	var player_character = preload("res://scene/Player.tscn").instantiate()
-	player_character.set_multiplayer_authority(Global.player_Data.id)
-	player_character.player_name = Global.player_Data.player_name
-	player_character.name=str(Global.player_Data.id)
+	player_character.set_multiplayer_authority(peer_id)
+	player_character.player_name=playerName
 	add_child(player_character)
+	
+
+@rpc	
+func add_newly_connected_player_character(new_peer_id,playername):
+	add_player_character(new_peer_id,playername)
+	
+@rpc
+func add_previously_connected_player_characters(peer_ids,playername):
+	for peer_id in peer_ids:
+		add_player_character(peer_id,playername)

@@ -1,21 +1,14 @@
 extends CharacterBody2D # Or your base class
 class_name Player
-
-
-var player_name: String
-
 @onready var animations = $animations
 @onready var state_machine = $stateMachine
-
-
+var player_name: String
+@onready var playerName: Label = $name
 func _ready():
 	# Only process input for our own player
-	set_process(multiplayer.get_unique_id() == get_multiplayer_authority())
-	if multiplayer.get_unique_id() == get_multiplayer_authority():
-		$Label.text = player_name
-	else:
-		$Label.text = player_name
+	print("player_name : ",player_name)
 	state_machine.init(self)
+	playerName.text="sdsadasdasda"
 
 func _process(delta):
 	if multiplayer.get_unique_id() != get_multiplayer_authority():
