@@ -94,5 +94,5 @@ layout_mode = 2
 text = "Loading...."
 
 [connection signal="pressed" from="ui/multiplayer/VBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="ui/multiplayer/VBoxContainer/CopyOID" to="." method="_on_copy_oid_pressed"]
+[connection signal="pressed" from="ui/multiplayer/VBoxContainer/CopyOID" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="ui/multiplayer/VBoxContainer/Join" to="." method="_on_join_pressed"]
