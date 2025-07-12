@@ -43,6 +43,7 @@ position = Vector2(125, 40)
 zoom = Vector2(4, 4)
 
 [node name="ui" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="multiplayer" type="Control" parent="ui"]
 layout_mode = 3

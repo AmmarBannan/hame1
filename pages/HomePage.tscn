@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnmxd4mkyrbky"]
+
+[ext_resource type="Script" uid="uid://ooq034es8ilv" path="res://pages/home_page.gd" id="1_3bq06"]
+
+[node name="HomePage" type="Node2D"]
+script = ExtResource("1_3bq06")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="multiplayer" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/multiplayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -46.5
+offset_right = 38.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="ui/multiplayer/VBoxContainer"]
+layout_mode = 2
+text = "Multiplayer Arena Shooter"
+
+[node name="Host" type="Button" parent="ui/multiplayer/VBoxContainer"]
+layout_mode = 2
+text = "host"
+
+[node name="HSeparator" type="HSeparator" parent="ui/multiplayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Join" type="Button" parent="ui/multiplayer/VBoxContainer"]
+layout_mode = 2
+text = "join"
+
+[connection signal="pressed" from="ui/multiplayer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="ui/multiplayer/VBoxContainer/Join" to="." method="_on_join_pressed"]

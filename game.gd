@@ -1,10 +1,10 @@
 class_name Game
 extends Node
 
-@onready var multiplayer_ui = $ui/multiplayer
-@onready var oid_lbl = $ui/multiplayer/VBoxContainer/OID
-@onready var oid_input = $ui/multiplayer/VBoxContainer/OIDInput
-
+#@onready var multiplayer_ui = $ui/multiplayer
+#@onready var oid_lbl = $ui/multiplayer/VBoxContainer/OID
+#@onready var oid_input = $ui/multiplayer/VBoxContainer/OIDInput
+var oid_input
 const PLAYER = preload("res://player/player.tscn")
 
 var peer = ENetMultiplayerPeer.new()
@@ -14,9 +14,9 @@ func _ready():
 	$MultiplayerSpawner.spawn_function = add_player
 	
 	await Multiplayer.noray_connected
-	oid_lbl.text = Noray.oid
+	#oid_lbl.text = Noray.oid
 
-func _on_host_pressed():
+func hosting():
 	Multiplayer.host()
 	
 	multiplayer.peer_connected.connect(
@@ -26,12 +26,12 @@ func _on_host_pressed():
 	)
 	
 	$MultiplayerSpawner.spawn(multiplayer.get_unique_id())
-	multiplayer_ui.hide()
+	#multiplayer_ui.hide()
 
-func _on_join_pressed():
+func joining():
 	Multiplayer.join(oid_input.text)
 	
-	multiplayer_ui.hide()
+	#multiplayer_ui.hide()
 
 func add_player(pid):
 	var player = PLAYER.instantiate()
