@@ -13,8 +13,6 @@ var players: Array[Player] = []
 func _ready():
 	$MultiplayerSpawner.spawn_function = add_player
 	
-	await Multiplayer.noray_connected
-	#oid_lbl.text = Noray.oid
 
 func hosting():
 	Multiplayer.host()

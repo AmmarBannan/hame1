@@ -41,8 +41,13 @@ placeholder_text = "Host OID"
 layout_mode = 2
 text = "join"
 
+[node name="back" type="Button" parent="ui/multiplayer/VBoxContainer"]
+layout_mode = 2
+text = "back"
+
 [node name="OID" type="Label" parent="ui/multiplayer/VBoxContainer"]
 layout_mode = 2
 text = "Loading...."
 
 [connection signal="pressed" from="ui/multiplayer/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="ui/multiplayer/VBoxContainer/back" to="." method="_on_back_pressed"]
