@@ -10,6 +10,8 @@ var game:Game=Game.new()
 func _ready() -> void:
 	Multiplayer.host()
 	oid_lbl.text = Noray.oid
+	UserData.server_id=Noray.oid
+	Multiplayer.host()
 	
 func _on_copy_oid_pressed():
 	DisplayServer.clipboard_set(Noray.oid)

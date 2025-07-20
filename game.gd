@@ -15,10 +15,15 @@ func _ready():
 	$MultiplayerSpawner.spawn_function = add_player
 	if UserData.is_Host:
 		label.text="I am a Host"
+		hosting()
 	else:
+	
 		label.text="I am a guest"
+		joining(UserData.server_id)
+	await Multiplayer.noray_connected
+	
 func hosting():
-	Multiplayer.host()
+	
 	
 	multiplayer.peer_connected.connect(
 		func(pid):
@@ -29,9 +34,9 @@ func hosting():
 	$MultiplayerSpawner.spawn(multiplayer.get_unique_id())
 	#multiplayer_ui.hide()
 
-func joining():
-	Multiplayer.join(oid_input.text)
-	
+func joining(oid):
+	print("you'r connecting to: "+oid)
+	Multiplayer.join(UserData.server_id)
 	#multiplayer_ui.hide()
 
 func add_player(pid):

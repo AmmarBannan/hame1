@@ -45,6 +45,7 @@ func takeDamage(amount):
 	if health<=0:
 		health=max_health
 		global_position=game.get_random_spawn_Point()
+		
 @rpc("call_local")
 func shoot(shooter_id):
 	var bullet=bult.instantiate()
