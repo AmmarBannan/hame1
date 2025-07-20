@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Multiplayer="*res://multiplayer.gd"
 Noray="*res://addons/netfox.noray/noray.gd"
 PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
+UserData="*res://user_data.gd"
 
 [display]
 

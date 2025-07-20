@@ -15,6 +15,7 @@ func _on_copy_oid_pressed():
 	DisplayServer.clipboard_set(Noray.oid)
 
 func _on_start_pressed() -> void:
+	UserData.is_Host=true
 	get_tree().change_scene_to_file("res://game.tscn")
 	
 func _on_back_pressed() -> void:

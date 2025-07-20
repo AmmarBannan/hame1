@@ -6,14 +6,17 @@ extends Node
 #@onready var oid_input = $ui/multiplayer/VBoxContainer/OIDInput
 var oid_input
 const PLAYER = preload("res://player/player.tscn")
+@onready var label: Label = $Label
 
 var peer = ENetMultiplayerPeer.new()
 var players: Array[Player] = []
 
 func _ready():
 	$MultiplayerSpawner.spawn_function = add_player
-	
-
+	if UserData.is_Host:
+		label.text="I am a Host"
+	else:
+		label.text="I am a guest"
 func hosting():
 	Multiplayer.host()
 	
