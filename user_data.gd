@@ -5,3 +5,5 @@ var player_id:int
 var is_Host:=false
 var server_id:String
 var connected:=false
+var partySize:=1
+var deadCounter:=0

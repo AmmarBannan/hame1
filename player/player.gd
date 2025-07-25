@@ -44,7 +44,7 @@ func takeDamage(amount):
 	health-=amount
 	if health<=0:
 		health=max_health
-		global_position=game.get_random_spawn_Point()
+		global_position=game.get_random_spawnpoint()
 		
 @rpc("call_local")
 func shoot(shooter_id):
@@ -52,3 +52,6 @@ func shoot(shooter_id):
 	bullet.set_multiplayer_authority(shooter_id)
 	get_parent().add_child(bullet)
 	bullet.transform=$gunContainer/Sprite2D/muzzle.global_transform
+	
+func dead():
+	UserData.deadCounter+=1
